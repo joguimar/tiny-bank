@@ -1,0 +1,7 @@
+{
+  "task_id": "task-api-error-handling",
+  "task_description": "Add comprehensive error handling to every API endpoint handler in the tiny-bank Spring Boot project. Each handler must catch specific error types (validation, not-found, unauthorized), return appropriate HTTP status codes, log errors with context for debugging, and return user-friendly messages. Implemented via a centralized @RestControllerAdvice global exception handler plus refactoring the two controllers, with test coverage.",
+  "status": "in_progress",
+  "feature_order": ["FEAT-001", "FEAT-002"],
+  "blocked_reason": null
+}
