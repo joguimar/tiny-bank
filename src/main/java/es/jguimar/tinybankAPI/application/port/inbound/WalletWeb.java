@@ -4,6 +4,7 @@ import es.jguimar.tinybankAPI.adapter.rest.dto.MoneyRequestDto;
 import es.jguimar.tinybankAPI.adapter.rest.dto.TransferRequestDto;
 import es.jguimar.tinybankAPI.adapter.rest.dto.WalletRequestDto;
 import es.jguimar.tinybankAPI.adapter.rest.dto.WalletResponseDto;
+import es.jguimar.tinybankAPI.infrastructure.exception.ResourceNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -52,7 +53,7 @@ public interface WalletWeb {
     WalletResponseDto moneyToWalletPut(@Parameter(in = ParameterIn.PATH, description = "Wallet id", required=true, schema=@Schema())
                                    @PathVariable("id") String id,
                                    @Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema())
-                                   @Valid @RequestBody MoneyRequestDto body);
+                                   @Valid @RequestBody MoneyRequestDto body) throws ResourceNotFoundException;
 
     @Operation(summary = "Show wallet data", description = "Show wallet data. ", tags={  })
     @ApiResponses(value = {
@@ -65,7 +66,7 @@ public interface WalletWeb {
             produces = { "application/json" },
             method = RequestMethod.GET)
     WalletResponseDto walletGet(@Parameter(in = ParameterIn.PATH, description = "Wallet id", required=true, schema=@Schema())
-                                   @PathVariable("id") String id);
+                                   @PathVariable("id") String id) throws ResourceNotFoundException;
 
     @Operation(summary = "Make a money transfer between", description = "Make a money transfer between . ", tags={  })
     @ApiResponses(value = {
@@ -81,7 +82,7 @@ public interface WalletWeb {
             consumes = { "application/json" },
             method = RequestMethod.POST)
     WalletResponseDto moneyTransferPost(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema())
-                                 @Valid @RequestBody TransferRequestDto body);
+                                 @Valid @RequestBody TransferRequestDto body) throws ResourceNotFoundException;
 
 }
 

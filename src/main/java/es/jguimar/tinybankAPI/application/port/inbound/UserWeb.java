@@ -2,6 +2,7 @@ package es.jguimar.tinybankAPI.application.port.inbound;
 
 import es.jguimar.tinybankAPI.adapter.rest.dto.UserRequestDto;
 import es.jguimar.tinybankAPI.adapter.rest.dto.UserResponseDto;
+import es.jguimar.tinybankAPI.infrastructure.exception.ResourceExistsException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -30,7 +31,7 @@ public interface UserWeb {
         produces = { "application/json" },
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    UserResponseDto userPost(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody UserRequestDto body);
+    UserResponseDto userPost(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody UserRequestDto body) throws ResourceExistsException;
 
 }
 

@@ -10,9 +10,7 @@ import es.jguimar.tinybankAPI.application.service.WalletService;
 import es.jguimar.tinybankAPI.infrastructure.exception.ResourceNotFoundException;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 
@@ -32,32 +30,20 @@ public class WalletController implements WalletWeb {
     }
 
     @Override
-    public WalletResponseDto moneyToWalletPut(String id, @Valid MoneyRequestDto body) {
-        try {
-            return walletMapper.toWalletResponseDto(
-                    walletService.putMoney(id, body.getAmount()));
-        } catch (ResourceNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
+    public WalletResponseDto moneyToWalletPut(String id, @Valid MoneyRequestDto body) throws ResourceNotFoundException {
+        return walletMapper.toWalletResponseDto(
+                walletService.putMoney(id, body.getAmount()));
     }
 
     @Override
-    public WalletResponseDto walletGet(String id) {
-        try {
-            return walletMapper.toWalletResponseDto(walletService.showWallet(id));
-        } catch (ResourceNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
+    public WalletResponseDto walletGet(String id) throws ResourceNotFoundException {
+        return walletMapper.toWalletResponseDto(walletService.showWallet(id));
     }
 
     @Override
-    public WalletResponseDto moneyTransferPost(@Valid TransferRequestDto body) {
-        try {
-            return walletMapper.toWalletResponseDto(
-                    walletService.transferMoney(body.getWalletSource(), body.getWalletTarget(), body.getAmount()));
-        } catch (ResourceNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
+    public WalletResponseDto moneyTransferPost(@Valid TransferRequestDto body) throws ResourceNotFoundException {
+        return walletMapper.toWalletResponseDto(
+                walletService.transferMoney(body.getWalletSource(), body.getWalletTarget(), body.getAmount()));
     }
 
 }
