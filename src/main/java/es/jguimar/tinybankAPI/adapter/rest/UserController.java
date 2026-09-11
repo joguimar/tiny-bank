@@ -8,9 +8,7 @@ import es.jguimar.tinybankAPI.application.service.CreateUserService;
 import es.jguimar.tinybankAPI.infrastructure.exception.ResourceExistsException;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 
@@ -25,12 +23,8 @@ public class UserController implements UserWeb {
     private final UserMapper userMapper;
 
     @Override
-    public UserResponseDto userPost(@Valid UserRequestDto body) {
-        try {
-            return userMapper.toUserResponseDto(
-                    createUserService.create(userMapper.toUser(body)));
-        } catch (ResourceExistsException e) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT);
-        }
+    public UserResponseDto userPost(@Valid UserRequestDto body) throws ResourceExistsException {
+        return userMapper.toUserResponseDto(
+                createUserService.create(userMapper.toUser(body)));
     }
 }
