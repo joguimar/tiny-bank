@@ -19,5 +19,5 @@ Con el spring profile 'local' la aplicación usara las propiedades del yml para 
 ## Documentación
 
 Documentación Swagger:
-http://localhost:8080/swagger-ui/html
+http://localhost:8080/swagger-ui.html
 

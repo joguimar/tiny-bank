@@ -4,11 +4,11 @@ import es.jguimar.tinybankAPI.application.port.inbound.WalletReadRepository;
 import es.jguimar.tinybankAPI.application.port.outbound.WalletWriteRepository;
 import es.jguimar.tinybankAPI.application.service.WalletService;
 import es.jguimar.tinybankAPI.domain.model.Wallet;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 
-@RunWith(SpringRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class CreateWalletUseCaseTest {
 
     @Mock
@@ -30,7 +30,7 @@ public class CreateWalletUseCaseTest {
 
     private CreateWalletUseCase createWalletUseCase;
 
-    @Before
+    @BeforeEach
     public void setup() {
         createWalletUseCase = new WalletService(walletReadRepository, walletWriteRepository);
     }

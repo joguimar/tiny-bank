@@ -5,12 +5,12 @@ import es.jguimar.tinybankAPI.adapter.rest.tranform.UserMapperImpl;
 import es.jguimar.tinybankAPI.application.service.CreateUserService;
 import es.jguimar.tinybankAPI.domain.model.User;
 import es.jguimar.tinybankAPI.infrastructure.exception.ResourceExistsException;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -21,7 +21,7 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class UserControllerTest {
 
     private MockMvc mockMvc;
@@ -29,7 +29,7 @@ public class UserControllerTest {
     @Mock
     private CreateUserService userService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         mockMvc = MockMvcBuilders.standaloneSetup(new UserController(userService, new UserMapperImpl())).build();
     }
@@ -81,10 +81,6 @@ public class UserControllerTest {
 
     @Test
     public void createNewUserWrongInput_shouldReturnKO() throws Exception {
-
-        // Given
-        given(userService.create(any()))
-                .willThrow(new ResourceExistsException());
 
         // When
         final ResultActions result = mockMvc.perform(

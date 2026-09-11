@@ -1,11 +1,17 @@
 plugins {
-    id 'org.springframework.boot' version '2.5.4'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.springframework.boot' version '3.3.5'
+    id 'io.spring.dependency-management' version '1.1.6'
     id 'java'
 }
 
 group 'es.jguimar'
 version '0.0.1'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
 
 configurations {
     compileOnly {
@@ -14,8 +20,7 @@ configurations {
 }
 
 ext {
-    springfoxVersion = "3.0.0"
-    jjwtVersion = "0.9.1"
+    springdocVersion = "2.6.0"
     mapstructVersion = "1.4.2.Final"
 }
 
@@ -29,15 +34,15 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     implementation 'org.springframework.security:spring-security-core'
-    implementation "io.springfox:springfox-boot-starter:${springfoxVersion}"
-    implementation 'io.springfox:springfox-swagger2'
-    implementation 'io.springfox:springfox-swagger-ui'
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springdocVersion}"
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
-    implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
+    implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo.spring3x'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
+test {
+    useJUnitPlatform()
+}
