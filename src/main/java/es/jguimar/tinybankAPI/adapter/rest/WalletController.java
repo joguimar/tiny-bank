@@ -8,17 +8,17 @@ import es.jguimar.tinybankAPI.adapter.rest.tranform.WalletMapper;
 import es.jguimar.tinybankAPI.application.port.inbound.WalletWeb;
 import es.jguimar.tinybankAPI.application.service.WalletService;
 import es.jguimar.tinybankAPI.infrastructure.exception.ResourceNotFoundException;
-import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 
 @RestController
-@Api(value = "API tiny bank poc", tags = { "Wallet" })
+@Tag(name = "Wallet")
 @AllArgsConstructor //Constructor-Based Dependency Injection
 public class WalletController implements WalletWeb {
 

@@ -5,11 +5,11 @@ import es.jguimar.tinybankAPI.application.port.outbound.WalletWriteRepository;
 import es.jguimar.tinybankAPI.application.service.WalletService;
 import es.jguimar.tinybankAPI.domain.model.Wallet;
 import es.jguimar.tinybankAPI.infrastructure.exception.ResourceNotFoundException;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -22,7 +22,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 
-@RunWith(SpringRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class PutMoneyUseCaseTest {
 
     @Mock
@@ -33,7 +33,7 @@ public class PutMoneyUseCaseTest {
 
     private PutMoneyUseCase putMoneyUseCase;
 
-    @Before
+    @BeforeEach
     public void setup() {
         putMoneyUseCase = new WalletService(walletReadRepository, walletWriteRepository);
     }

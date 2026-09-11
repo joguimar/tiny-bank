@@ -5,12 +5,12 @@ import es.jguimar.tinybankAPI.adapter.rest.tranform.WalletMapperImpl;
 import es.jguimar.tinybankAPI.application.service.WalletService;
 import es.jguimar.tinybankAPI.domain.model.Wallet;
 import es.jguimar.tinybankAPI.infrastructure.exception.ResourceNotFoundException;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class WalletControllerTest {
 
     private MockMvc mockMvc;
@@ -30,7 +30,7 @@ public class WalletControllerTest {
     @Mock
     private WalletService walletService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         mockMvc = MockMvcBuilders.standaloneSetup(new WalletController(walletService, new WalletMapperImpl())).build();
     }
