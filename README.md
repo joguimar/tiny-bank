@@ -65,7 +65,9 @@ Arranca la aplicación con el perfil por defecto (`dev`, Mongo embebida):
 gradlew.bat bootRun
 ```
 
-La API quedará disponible en `http://localhost:8080`.
+La API quedará disponible en el host y puerto configurados para la aplicación. En los
+ejemplos siguientes se usa `<BASE_URL>` como marcador de posición de esa dirección base
+(protocolo, host y puerto), que debes sustituir por la de tu entorno.
 
 Para usar el perfil `local` (conecta a una MongoDB externa según `application-local.yml`):
 
@@ -93,35 +95,36 @@ Para usar el perfil `local` (conecta a una MongoDB externa según `application-l
 
 ```bash
 # Crear un usuario
-curl -X POST http://localhost:8080/user \
+curl -X POST <BASE_URL>/user \
   -H "Content-Type: application/json" \
   -d '{"name": "alice", "password": "secret"}'
 
 # Crear una wallet para un usuario
-curl -X POST http://localhost:8080/wallet \
+curl -X POST <BASE_URL>/wallet \
   -H "Content-Type: application/json" \
   -d '{"userIds": ["<userId>"]}'
 
 # Depositar dinero
-curl -X PUT http://localhost:8080/wallet/<walletId>/money \
+curl -X PUT <BASE_URL>/wallet/<walletId>/money \
   -H "Content-Type: application/json" \
   -d '{"amount": 100.0}'
 
 # Consultar una wallet
-curl http://localhost:8080/wallet/<walletId>
+curl <BASE_URL>/wallet/<walletId>
 
 # Transferir dinero entre wallets
-curl -X POST http://localhost:8080/wallet/money-tranfer \
+curl -X POST <BASE_URL>/wallet/money-tranfer \
   -H "Content-Type: application/json" \
   -d '{"amount": 50.0, "walletSource": "<walletId>", "walletTarget": "<walletId>"}'
 ```
 
 ## Documentación (Swagger)
 
-Con la aplicación en marcha, la documentación interactiva OpenAPI está disponible en:
+Con la aplicación en marcha, la documentación interactiva OpenAPI está disponible en la
+ruta `/swagger-ui/` sobre la dirección base de tu entorno:
 
 ```
-http://localhost:8080/swagger-ui/
+<BASE_URL>/swagger-ui/
 ```
 
 ## Estructura del proyecto
